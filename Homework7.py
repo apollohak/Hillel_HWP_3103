@@ -9,22 +9,26 @@ person_sw = [{"name": "Чубакка", "age": 202},
 # а) Напечатать имя самого молодого человека. Если возраст совпадает - напечатать все имена.
 
 age_list = [list(age.values())[1] for age in person_sw]
+min_age = min(age_list)
 
 for some_person in person_sw:
-    if len(set(age_list)) < len(age_list):
+    count = age_list.count(min_age)
+    if count > 1:
         print(list(some_person.values())[0])
-    elif list(some_person.values())[1] == min(age_list):
-        print(f"Имя самого молодого: {list(some_person.values())[0]}")
+    elif list(some_person.values())[1] == min_age:
+        print(f"Имя самого молодого:{list(some_person.values())[0]}")
 
 # б) Напечатать самое длинное имя. Если длина имени совпадает - напечатать все имена.
 
 long_list = [len(list(len_name.values())[0]) for len_name in person_sw]
+max_len = max(long_list)
 
-for long_name in person_sw:
-    if len(set(long_list)) < len(long_list):
-        print(list(long_name.values())[0])
-    elif len(list(long_name.values())[0]) == max(long_list):
-        print(f"Самое длинное имя: {list(long_name.values())[0]}")
+for some_person in person_sw:
+    count = long_list.count(max_len)
+    if count > 1:
+        print(list(some_person.values())[0])
+    elif len(list(some_person.values())[0]) == max_len:
+        print(f"Самое длинное имя: {list(some_person.values())[0]}")
 
 # в) Посчитать среднее количество лет всех людей из списка.
 
@@ -51,17 +55,10 @@ new_dict = {key: value for key, value in my_dict_1.items() if key not in my_dict
 
 # г) Объединить эти два словаря в новый словарь по правилу:
 # если ключ есть только в одном из двух словарей - поместить пару ключ:значение,
-
-total_dict = {**my_dict_1, **my_dict_2}
-total_list = list(set(my_dict_1.keys()).difference(set((my_dict_2.keys()))))
-total_list.extend(set(my_dict_2.keys()).difference(set((my_dict_1.keys()))))
-
-new_dict = {key: value for key, value in total_dict.items() if key in total_list}
-
 # если ключ есть в двух словарях - поместить пару {ключ: [значение_из_первого_словаря, значение_из_второго_словаря]},
 
-combinate_dict = {key: [value] for key, value in my_dict_1.items() if key in my_dict_2}
+key_dict_1 = {key: value for key, value in my_dict_1.items() if key not in my_dict_2}
+key_dict_2 = {key: value for key, value in my_dict_2.items() if key not in my_dict_1}
+key_value1_value2 = {key: [value, my_dict_2.get(key)] for key, value in my_dict_1.items() if key in my_dict_2}
 
-for key, value in my_dict_2.items():
-    if key in my_dict_1:
-        combinate_dict[key].append(value)
+total_dict = {**key_dict_1, **key_dict_2, **key_value1_value2}
