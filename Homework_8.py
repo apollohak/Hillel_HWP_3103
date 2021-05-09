@@ -129,8 +129,6 @@ def create_email(names, domains):
     return email_name
 
 
-####################################################
-
 my_str_list = ['Дан', 'список', 'строк', 'my_list']
 str_list = ['qwe', 'asd', 'afr', 'ooa', 'lki', 'pal', 'ayu']
 my_list = ['Дан', 'список', 45, 'строка', 7]
@@ -139,8 +137,6 @@ some_str_1 = "Some text fo str"
 some_str_2 = "Text for this string"
 names = ["padawan", "master", "knight", "general"]
 domains = ["net", "com", "ua", "ru"]
-
-####################################################
 
 result_1 = create_revers_str_list(my_str_list)
 result_2 = create_list_start_a(str_list)
