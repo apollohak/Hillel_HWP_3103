@@ -12,8 +12,7 @@ age_list = [list(age.values())[1] for age in person_sw]
 min_age = min(age_list)
 
 for some_person in person_sw:
-    count = age_list.count(min_age)
-    if count > 1:
+    if age_list.count(min_age) > 1:
         print(list(some_person.values())[0])
     elif list(some_person.values())[1] == min_age:
         print(f"Имя самого молодого:{list(some_person.values())[0]}")
@@ -24,8 +23,7 @@ long_list = [len(list(len_name.values())[0]) for len_name in person_sw]
 max_len = max(long_list)
 
 for some_person in person_sw:
-    count = long_list.count(max_len)
-    if count > 1:
+    if long_list.count(max_len) > 1:
         print(list(some_person.values())[0])
     elif len(list(some_person.values())[0]) == max_len:
         print(f"Самое длинное имя: {list(some_person.values())[0]}")
