@@ -12,8 +12,8 @@ import string
 """
 
 
-def create_list(my_list):
-    res_list = [value[::-1] if index % 2 else value for index, value in enumerate(my_list)]
+def create_revers_str_list(my_str_list):
+    res_list = [value[::-1] if index % 2 else value for index, value in enumerate(my_str_list)]
     return res_list
 
 
@@ -25,8 +25,8 @@ def create_list(my_list):
 """
 
 
-def create_list_start_a():
-    res_list = [value for value in my_list if value.startswith('a')]
+def create_list_start_a(str_list):
+    res_list = [value for value in str_list if value.startswith('a')]
     return res_list
 
 
@@ -38,8 +38,8 @@ def create_list_start_a():
 """
 
 
-def create_list_with_a():
-    res_list = [some_str for some_str in my_list if 'a' in some_str]
+def create_list_with_a(str_list):
+    res_list = [some_str for some_str in str_list if 'a' in some_str]
     return res_list
 
 
@@ -51,7 +51,7 @@ def create_list_with_a():
 """
 
 
-def create_str_list():
+def create_str_list(my_list):
     res_list = [some_str for some_str in my_list if type(some_str) == str]
     return res_list
 
@@ -64,7 +64,7 @@ def create_str_list():
 """
 
 
-def list_unique_sym():
+def create_unique_sym_list(my_str):
     res_list = [symbol for symbol in my_str if my_str.count(symbol) == 1]
     return res_list
 
@@ -77,7 +77,7 @@ def list_unique_sym():
 """
 
 
-def create_inter_symb_list():
+def create_inter_symb_list(some_str_1, some_str_2):
     res_list = [symbol for symbol in set(some_str_1) if symbol in set(some_str_2)]
     return res_list
 
@@ -89,8 +89,64 @@ def create_inter_symb_list():
 но в каждой только по одному разу.
 """
 
+def create_inter_symbol_one(some_str_1, some_str_2):
+    res_list = [symbol for symbol in some_str_1 if some_str_1.count(symbol) == 1 and some_str_2.count(symbol) == 1]
+    return res_list
 
-my_list = ['Дан', 'список', 'строк', 'my_list']
+
+####################################################
+"""
+8. Даны списки names и domains (создать самостоятельно).
+Написать функцию для генерирования e-mail в формате:
+фамилия.число_от_100_до_999@строка_букв_длинной_от_5_до_7_символов.домен
+фамилию и домен брать случайным образом из заданных списков переданных в функцию в виде параметров.
+Строку и число генерировать случайным образом.
+"""
+
+
+def create_surname(names):
+    family = random.choice(names)
+    return family
+
+
+def create_random_num():
+    random_num = random.randint(100, 999)
+    return random_num
+
+
+def create_random_str():
+    list_word = "".join([random.choice(string.ascii_lowercase) for _ in range(random.randint(5, 7))])
+    return list_word
+
+
+def create_domain(domains):
+    rand_domain = random.choice(domains)
+    return rand_domain
+
+
+def create_email(names, domains):
+    email_name = f"{create_surname(names)}.{create_random_num()}@{create_random_str()}.{create_domain(domains)}"
+    return email_name
+
+
+####################################################
+
+my_str_list = ['Дан', 'список', 'строк', 'my_list']
+str_list = ['qwe', 'asd', 'afr', 'ooa', 'lki', 'pal', 'ayu']
+my_list = ['Дан', 'список', 45, 'строка', 7]
 my_str = "My name is Vova. I'm 41. But I still believe in magic. EXPELLIARMUS!"
 some_str_1 = "Some text fo str"
 some_str_2 = "Text for this string"
+names = ["padawan", "master", "knight", "general"]
+domains = ["net", "com", "ua", "ru"]
+
+####################################################
+
+result_1 = create_revers_str_list(my_str_list)
+result_2 = create_list_start_a(str_list)
+result_3 = create_list_with_a(str_list)
+result_4 = create_str_list(my_list)
+result_5 = create_unique_sym_list(my_str)
+result_6 = create_inter_symb_list(some_str_1, some_str_2)
+result_7 = create_inter_symbol_one(some_str_1, some_str_2)
+result_8 = create_email(names, domains)
