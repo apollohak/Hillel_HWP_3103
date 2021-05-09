@@ -115,8 +115,8 @@ def create_random_num():
 
 
 def create_random_str():
-    list_word = "".join([random.choice(string.ascii_lowercase) for _ in range(random.randint(5, 7))])
-    return list_word
+    rand_str = "".join([random.choice(string.ascii_lowercase) for _ in range(random.randint(5, 7))])
+    return rand_str
 
 
 def create_domain(domains):
