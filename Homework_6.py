@@ -59,6 +59,8 @@ some_str_1 = "Some text fo str"
 some_str_2 = "Text for this string"
 symbol_list = [symbol for symbol in set(some_str_1) if symbol in set(some_str_2)]
 
+symbol_list_2 = list(set(some_str_1).intersection(set(some_str_2)))
+
 ####################################################
 
 # 7. Даны две строки. Создать список в который поместить те символы, которые есть в обеих строках,
@@ -74,6 +76,10 @@ for symbol in set(some_str_1):
     if count == 1:
         if count_2 == 1 and symbol in some_str_2:
             res_list.append(symbol)
+
+for symbol in symbol_list_2:
+    if some_str_1.count(symbol) == 1 and some_str_2.count(symbol) == 1:
+        res_list.append(symbol)
 
 ####################################################
 
