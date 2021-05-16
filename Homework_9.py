@@ -67,8 +67,8 @@ def create_split_list():
 def create_dict_mm():
     dict_mm = {data[1]: None for data in create_split_list()}
     mm_list = ["0" + str(num) if len(str(num)) == 1 else str(num) for num in range(1, 13)]
-    zip_dict = dict(zip(dict_mm.keys(), mm_list))
-    return zip_dict
+    modified_mm = dict(zip(dict_mm.keys(), mm_list))
+    return modified_mm
 
 
 def create_list_dictionaries():
