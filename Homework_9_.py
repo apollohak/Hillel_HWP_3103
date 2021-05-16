@@ -1,5 +1,4 @@
-import os
-import json
+FILE_NAME = "Homework9_files/authors.txt"
 
 ##################################################
 """
@@ -10,13 +9,12 @@ import json
 
 def take_data(filename):
     with open(filename, "r") as txt_file:
-        data = txt_file.read()
-        data = data.split("\n")
+        data = txt_file.readlines()
     return data
 
 
 def create_list_data(filename):
-    res_list = [names[1:] for names in take_data(filename)]
+    res_list = [names[1:-1] for names in take_data(filename)]
     return res_list
 
 
@@ -50,27 +48,45 @@ def create_surname_list(filename):
 """
 
 
-def take_data_date(filename):
-    with open(filename, "r") as txt_file:
-        data = txt_file.read()
-        data = data.split("\n")
+def take_data_date(FILE_NAME):
+    with open(FILE_NAME, "r") as txt_file:
+        data = txt_file.readlines()
     return data
 
 
-def create_dict(filename):
-    res_list = []
-    for date in take_data_date(filename):
-        res_list.append(date[])
-    return res_list
+def create_split_list():
+    res = []
+    for data in take_data_date(FILE_NAME):
+        data = data.split("-")[0]
+        data = data.split()
+        if len(data) == 3:
+            res.append(data)
+    return res
+
+
+def create_modif_mm():
+    dict_mm = {data[1]: None for data in create_split_list()}
+    mm_list = ["0" + str(num) if len(str(num)) == 1 else str(num) for num in range(1, 13)]
+    zip_dict = dict(zip(dict_mm.keys(), mm_list))
+    return zip_dict
+
+
+def create_list_dict():
+    res = []
+    for data in create_split_list():
+        data_dd = data[0]
+        data_dd = data_dd[:-2]
+        data_mm = data[1]
+        data_yy = data[2]
+        if len(data_dd) == 1:
+            data_dd = "0" + data_dd
+        res.append({"date_original": " ".join(data),
+                    "date_modified": f"{data_dd}/{data_mm.replace(data_mm, create_modif_mm().get(data_mm))}/{data_yy}"})
+    return res
 
 
 file_name_1 = "Homework9_files/domains.txt"
 file_name_2 = "Homework9_files/names.txt"
-file_name_3 = "Homework9_files/authors.txt"
 result_1 = create_list_data(file_name_1)
 result_2 = create_surname_list(file_name_2)
-result_3 = create_dict(file_name_3)
-print(result_1)
-print(result_2)
-print(take_data_date(file_name_3))
-print(result_3)
+result_3 = create_list_dict()
