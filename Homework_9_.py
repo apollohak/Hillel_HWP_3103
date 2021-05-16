@@ -64,14 +64,14 @@ def create_split_list():
     return res
 
 
-def create_modif_mm():
+def create_dict_mm():
     dict_mm = {data[1]: None for data in create_split_list()}
     mm_list = ["0" + str(num) if len(str(num)) == 1 else str(num) for num in range(1, 13)]
     zip_dict = dict(zip(dict_mm.keys(), mm_list))
     return zip_dict
 
 
-def create_list_dict():
+def create_list_dictionaries():
     res = []
     for data in create_split_list():
         data_dd = data[0]
@@ -81,7 +81,7 @@ def create_list_dict():
         if len(data_dd) == 1:
             data_dd = "0" + data_dd
         res.append({"date_original": " ".join(data),
-                    "date_modified": f"{data_dd}/{data_mm.replace(data_mm, create_modif_mm().get(data_mm))}/{data_yy}"})
+                    "date_modified": f"{data_dd}/{data_mm.replace(data_mm, create_dict_mm().get(data_mm))}/{data_yy}"})
     return res
 
 
@@ -89,4 +89,4 @@ file_name_1 = "Homework9_files/domains.txt"
 file_name_2 = "Homework9_files/names.txt"
 result_1 = create_list_data(file_name_1)
 result_2 = create_surname_list(file_name_2)
-result_3 = create_list_dict()
+result_3 = create_list_dictionaries()
