@@ -90,4 +90,4 @@ file_name_2 = "Homework9_files/names.txt"
 result_1 = create_list_data(file_name_1)
 result_2 = create_surname_list(file_name_2)
 result_3 = create_list_dictionaries()
-print(result_3)
+
