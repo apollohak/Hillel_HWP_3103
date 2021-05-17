@@ -55,13 +55,13 @@ def take_data_date(FILE_NAME):
 
 
 def create_split_list():
-    res = []
+    result = []
     for data in take_data_date(FILE_NAME):
         data = data.split("-")[0]
         data = data.split()
         if len(data) == 3:
-            res.append(data)
-    return res
+            result.append(data)
+    return result
 
 
 def create_dict_mm():
@@ -72,7 +72,7 @@ def create_dict_mm():
 
 
 def create_list_dictionaries():
-    res = []
+    result = []
     for data in create_split_list():
         data_dd = data[0]
         data_dd = data_dd[:-2]
@@ -80,9 +80,9 @@ def create_list_dictionaries():
         data_yy = data[2]
         if len(data_dd) == 1:
             data_dd = "0" + data_dd
-        res.append({"date_original": " ".join(data),
-                    "date_modified": f"{data_dd}/{data_mm.replace(data_mm, create_dict_mm().get(data_mm))}/{data_yy}"})
-    return res
+        result.append({"date_original": " ".join(data),
+                       "date_modified": f"{data_dd}/{create_dict_mm().get(data_mm)}/{data_yy}"})
+    return result
 
 
 file_name_1 = "Homework9_files/domains.txt"
@@ -90,3 +90,4 @@ file_name_2 = "Homework9_files/names.txt"
 result_1 = create_list_data(file_name_1)
 result_2 = create_surname_list(file_name_2)
 result_3 = create_list_dictionaries()
+print(result_3)
