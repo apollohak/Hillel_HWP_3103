@@ -7,14 +7,14 @@ FILE_NAME = "Homework9_files/authors.txt"
 """
 
 
-def take_data(filename):
+def open_domains_file(filename):
     with open(filename, "r") as txt_file:
         data = txt_file.readlines()
     return data
 
 
-def create_list_data(filename):
-    res_list = [names[1:-1] for names in take_data(filename)]
+def create_domains_list(filename):
+    res_list = [name.replace(".", "")[:-1] for name in open_domains_file(filename)]
     return res_list
 
 
@@ -27,14 +27,14 @@ def create_list_data(filename):
 """
 
 
-def take_data_surname(filename):
+def open_names_file(filename):
     with open(filename, "r") as txt_file:
         data = txt_file.readlines()
     return data
 
 
 def create_surname_list(filename):
-    res_list = [surname.split("\t")[1] for surname in take_data_surname(filename)]
+    res_list = [surname.split("\t")[1] for surname in open_names_file(filename)]
     return res_list
 
 
@@ -48,15 +48,15 @@ def create_surname_list(filename):
 """
 
 
-def take_data_date(FILE_NAME):
-    with open(FILE_NAME, "r") as txt_file:
+def open_authors_file(fielname=FILE_NAME):
+    with open(fielname, "r") as txt_file:
         data = txt_file.readlines()
     return data
 
 
-def create_split_list():
+def create_split_date_list():
     result = []
-    for data in take_data_date(FILE_NAME):
+    for data in open_authors_file():
         data = data.split("-")[0]
         data = data.split()
         if len(data) == 3:
@@ -64,30 +64,34 @@ def create_split_list():
     return result
 
 
-def create_dict_mm():
-    dict_mm = {data[1]: None for data in create_split_list()}
-    mm_list = ["0" + str(num) if len(str(num)) == 1 else str(num) for num in range(1, 13)]
-    modified_mm = dict(zip(dict_mm.keys(), mm_list))
-    return modified_mm
-
-
-def create_list_dictionaries():
+def create_modified_dictionaries():
     result = []
-    for data in create_split_list():
+    for data in create_split_date_list():
         data_dd = data[0]
         data_dd = data_dd[:-2]
-        data_mm = data[1]
-        data_yy = data[2]
         if len(data_dd) == 1:
             data_dd = "0" + data_dd
         result.append({"date_original": " ".join(data),
-                       "date_modified": f"{data_dd}/{create_dict_mm().get(data_mm)}/{data_yy}"})
+                       "date_modified": f"{data_dd}/{months_dict.get(data[1])}/{data[2]}"})
     return result
 
 
 file_name_1 = "Homework9_files/domains.txt"
 file_name_2 = "Homework9_files/names.txt"
-result_1 = create_list_data(file_name_1)
-result_2 = create_surname_list(file_name_2)
-result_3 = create_list_dictionaries()
 
+months_dict = {'January': '01',
+               'February': '02',
+               'March': '03',
+               'April': '04',
+               'May': '05',
+               'June': '06',
+               'July': '07',
+               'August': '08',
+               'September': '09',
+               'October': '10',
+               'November': '11',
+               'December': '12'}
+
+result_1 = create_domains_list(file_name_1)
+result_2 = create_surname_list(file_name_2)
+result_3 = create_modified_dictionaries()
