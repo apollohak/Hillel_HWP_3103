@@ -7,14 +7,14 @@ FILENAME = "Homework9_files/authors.txt"
 """
 
 
-def open_domains_file(filename):
+def read_domains_file(filename):
     with open(filename, "r") as txt_file:
         data = txt_file.readlines()
     return data
 
 
 def create_domains_list(filename):
-    res_list = [name.replace(".", "")[:-1] for name in open_domains_file(filename)]
+    res_list = [name.replace(".", "")[:-1] for name in read_domains_file(filename)]
     return res_list
 
 
@@ -28,14 +28,14 @@ def create_domains_list(filename):
 """
 
 
-def open_names_file(filename):
+def read_names_file(filename):
     with open(filename, "r") as txt_file:
         data = txt_file.readlines()
     return data
 
 
 def create_surname_list(filename):
-    res_list = [surname.split("\t")[1] for surname in open_names_file(filename)]
+    res_list = [surname.split("\t")[1] for surname in read_names_file(filename)]
     return res_list
 
 
@@ -50,7 +50,7 @@ def create_surname_list(filename):
 """
 
 
-def open_authors_file(fielname=FILENAME):
+def read_authors_file(fielname=FILENAME):
     with open(fielname, "r") as txt_file:
         data = txt_file.readlines()
     return data
@@ -58,7 +58,7 @@ def open_authors_file(fielname=FILENAME):
 
 def create_split_date_list():
     result = []
-    for data in open_authors_file():
+    for data in read_authors_file():
         data = data.split("-")[0]
         data = data.split()
         if len(data) == 3:
@@ -93,6 +93,6 @@ def create_modified_dictionaries():
 file_name_1 = "Homework9_files/domains.txt"
 file_name_2 = "Homework9_files/names.txt"
 
-result_1 = create_domains_list(file_name_1)
-result_2 = create_surname_list(file_name_2)
-result_3 = create_modified_dictionaries()
+domains = create_domains_list(file_name_1)
+surnames = create_surname_list(file_name_2)
+modified_date = create_modified_dictionaries()
