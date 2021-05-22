@@ -93,4 +93,3 @@ months_dict = {'January': '01',
 result_1 = create_domains_list(file_name_1)
 result_2 = create_surname_list(file_name_2)
 result_3 = create_modified_dictionaries(file_name_3, months_dict)
-print(result_3)
