@@ -96,4 +96,3 @@ file_name_2 = "Homework9_files/names.txt"
 result_1 = create_domains_list(file_name_1)
 result_2 = create_surname_list(file_name_2)
 result_3 = create_modified_dictionaries()
-
