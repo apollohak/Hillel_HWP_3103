@@ -53,7 +53,7 @@ def sort_by_count_word(pers_dict):
 
 
 file_name = "data.json"
-persons = reads_json_data(file_name)
+persons = reads_json_file(file_name)
 
 surname = sorted(persons, key=sort_by_surname)
 death_year = sorted(persons, key=sort_by_death_year)
