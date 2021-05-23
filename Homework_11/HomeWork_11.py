@@ -6,7 +6,7 @@ import re
 """
 
 
-def reads_json_data(filename):
+def reads_json_file(filename):
     with open(filename, 'r', encoding="utf-8") as json_file:
         data = json.load(json_file)
         return data
