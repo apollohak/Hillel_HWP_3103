@@ -34,11 +34,11 @@ def sort_by_surname(pers_dict):
 
 
 def sort_by_death_year(pers_dict):
-    year = pers_dict['years']
-    age = int(re.findall(r'[0-9]+', year)[-1])
-    if "BC" in year:
-        age = -1 * age
-    return age
+    years = pers_dict['years']
+    death_y = int(re.findall(r'[0-9]+', years)[-1])
+    if "BC" in years:
+        death_y = -1 * death_y
+    return death_y
 
 
 ##################################################
