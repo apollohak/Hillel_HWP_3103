@@ -1,4 +1,4 @@
-FILENAME = "Homework9_files/authors.txt"
+FILENAME = "authors.txt"
 
 ##################################################
 """
@@ -90,8 +90,8 @@ def create_modified_dictionaries():
     return result
 
 
-file_name_1 = "Homework9_files/domains.txt"
-file_name_2 = "Homework9_files/names.txt"
+file_name_1 = "domains.txt"
+file_name_2 = "names.txt"
 
 domains = create_domains_list(file_name_1)
 surnames = create_surname_list(file_name_2)
