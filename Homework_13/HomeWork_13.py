@@ -1,22 +1,25 @@
 ##################################################
 
+
+class FileReader:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def read_file(self):
+        with open(self.filename, "r") as txt_file:
+            data = txt_file.readlines()
+        return data
+
+
 """
 1. Написать функцию, которая получает в виде параметра имя файла названия интернет доменов (domains.txt)
 и возвращает их в виде списка строк (названия возвращать без точки).
 """
 
 
-class DomainsWorker:
-    def __init__(self, filename):
-        self.filename = filename
-
-    def read_domains_file(self):
-        with open(self.filename, "r") as txt_file:
-            data = txt_file.readlines()
-        return data
-
+class DomainsWorker(FileReader):
     def create_domains_list(self):
-        res_list = [name.replace(".", "")[:-1] for name in self.read_domains_file()]
+        res_list = [name.replace(".", "")[:-1] for name in self.read_file()]
         return res_list
 
     def __repr__(self):
@@ -32,17 +35,9 @@ class DomainsWorker:
 """
 
 
-class NamesWorker:
-    def __init__(self, filename):
-        self.filename = filename
-
-    def read_names_file(self):
-        with open(self.filename, "r") as txt_file:
-            data = txt_file.readlines()
-        return data
-
+class NamesWorker(FileReader):
     def create_surname_list(self):
-        res_list = [surname.split("\t")[1] for surname in self.read_names_file()]
+        res_list = [surname.split("\t")[1] for surname in self.read_file()]
         return res_list
 
     def __repr__(self):
@@ -60,9 +55,9 @@ class NamesWorker:
 """
 
 
-class ModDateWorker:
+class ModDateWorker(FileReader):
     def __init__(self, filename):
-        self.filename = filename
+        super().__init__(filename)
         self.months = {'January': '01',
                        'February': '02',
                        'March': '03',
@@ -77,14 +72,9 @@ class ModDateWorker:
                        'December': '12'}
         self.create_modified_dictionaries()
 
-    def read_authors_file(self):
-        with open(self.filename, "r") as txt_file:
-            data = txt_file.readlines()
-        return data
-
     def create_split_date_list(self):
         result = []
-        for data in self.read_authors_file():
+        for data in self.read_file():
             data = data.split("-")[0]
             data = data.split()
             if len(data) == 3:
