@@ -46,5 +46,5 @@ def create_quotes_csv_file(data):
 
 
 url = "http://api.forismatic.com/api/1.0/"
-quotes_list = create_quotes_list(0)
+quotes_list = create_quotes_list(10)
 create_quotes_csv_file(quotes_list)
