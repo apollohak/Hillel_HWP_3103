@@ -11,18 +11,23 @@ import csv
 
 
 def create_quotes_list(count):
-    res = []
-    while len(res) < count:
+    authors = []
+    quotes = []
+    links = []
+    while len(quotes) < count:
         params = {"method": "getQuote",
                   "format": "json",
                   "key": randint(0, 999)}
         r = requests.get(url, params=params)
         data = r.json()
-        quote = data["quoteText"]
         author = data["quoteAuthor"]
+        quote = data["quoteText"]
         link = data["quoteLink"]
-        if author and quote not in res:
-            res.append(quote)
+        if author and quote not in quotes:
+            authors.append(author)
+            quotes.append(quote)
+            links.append(link)
+    res = list(zip(authors, quotes, links))
     return res
 
 
@@ -39,14 +44,12 @@ Author, Quote, URL.
 
 
 def create_quotes_csv_file(data):
-    with open("quote.csv", 'w', encoding='cp1251') as f:
-        header = ["Author", "Quote", "URL"]
-        writer = csv.DictWriter(f, delimiter=",", lineterminator="\r", fieldnames=header)
-        writer.writeheader()
-        writer.writerows(sorted(data, key=lambda x: x.get("Author")))
+    with open("quote_zip.csv", 'w', encoding="utf-8") as f:
+        writer = csv.writer(f, delimiter=",", lineterminator="\r")
+        writer.writerow(["Author", "Quote", "URL"])
+        writer.writerows(sorted(data))
 
 
 url = "http://api.forismatic.com/api/1.0/"
 quotes_list = create_quotes_list(10)
 create_quotes_csv_file(quotes_list)
-print(quotes_list)
