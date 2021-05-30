@@ -23,12 +23,12 @@ class FileReader:
 
 
 class DomainsWorker(FileReader):
-    def _create_domains_list(self):
+    def create_domains_list(self):
         res_list = [name.replace(".", "")[:-1] for name in self.data]
         return res_list
 
     def __repr__(self):
-        return f"{self._create_domains_list()}"
+        return f"{self.create_domains_list()}"
 
 
 ##################################################
@@ -65,17 +65,17 @@ class ModDateWorker(FileReader):
     def __init__(self, filename):
         super().__init__(filename)
         self._months = {'January': '01',
-                       'February': '02',
-                       'March': '03',
-                       'April': '04',
-                       'May': '05',
-                       'June': '06',
-                       'July': '07',
-                       'August': '08',
-                       'September': '09',
-                       'October': '10',
-                       'November': '11',
-                       'December': '12'}
+                        'February': '02',
+                        'March': '03',
+                        'April': '04',
+                        'May': '05',
+                        'June': '06',
+                        'July': '07',
+                        'August': '08',
+                        'September': '09',
+                        'October': '10',
+                        'November': '11',
+                        'December': '12'}
 
     def _create_split_date_list(self):
         result = []
@@ -94,7 +94,7 @@ class ModDateWorker(FileReader):
             if len(data_dd) == 1:
                 data_dd = "0" + data_dd
             result.append({"date_original": " ".join(data),
-                           "date_modified": f"{data_dd}/{self.months.get(data[1])}/{data[2]}"})
+                           "date_modified": f"{data_dd}/{self._months.get(data[1])}/{data[2]}"})
         return result
 
     def __repr__(self):
