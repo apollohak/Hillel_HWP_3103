@@ -1,4 +1,13 @@
-FILENAME = "authors.txt"
+"""
+Функция чтения файла
+"""
+
+
+def read_file(filename):
+    with open(filename, "r") as txt_file:
+        data = txt_file.readlines()
+    return data
+
 
 ##################################################
 """
@@ -7,14 +16,8 @@ FILENAME = "authors.txt"
 """
 
 
-def read_domains_file(filename):
-    with open(filename, "r") as txt_file:
-        data = txt_file.readlines()
-    return data
-
-
 def create_domains_list(filename):
-    res_list = [name.replace(".", "")[:-1] for name in read_domains_file(filename)]
+    res_list = [name.replace(".", "")[:-1] for name in read_file(filename)]
     return res_list
 
 
@@ -28,14 +31,8 @@ def create_domains_list(filename):
 """
 
 
-def read_names_file(filename):
-    with open(filename, "r") as txt_file:
-        data = txt_file.readlines()
-    return data
-
-
 def create_surname_list(filename):
-    res_list = [surname.split("\t")[1] for surname in read_names_file(filename)]
+    res_list = [surname.split("\t")[1] for surname in read_file(filename)]
     return res_list
 
 
@@ -50,15 +47,9 @@ def create_surname_list(filename):
 """
 
 
-def read_authors_file(fielname=FILENAME):
-    with open(fielname, "r") as txt_file:
-        data = txt_file.readlines()
-    return data
-
-
-def create_split_date_list():
+def create_split_date_list(filename):
     result = []
-    for data in read_authors_file():
+    for data in read_file(filename):
         data = data.split("-")[0]
         data = data.split()
         if len(data) == 3:
@@ -66,7 +57,7 @@ def create_split_date_list():
     return result
 
 
-def create_modified_dictionaries():
+def create_modified_dictionaries(filename):
     result = []
     months_dict = {'January': '01',
                    'February': '02',
@@ -80,7 +71,7 @@ def create_modified_dictionaries():
                    'October': '10',
                    'November': '11',
                    'December': '12'}
-    for data in create_split_date_list():
+    for data in create_split_date_list(filename):
         data_dd = data[0]
         data_dd = data_dd[:-2]
         if len(data_dd) == 1:
@@ -92,7 +83,8 @@ def create_modified_dictionaries():
 
 file_name_1 = "domains.txt"
 file_name_2 = "names.txt"
+file_name_3 = "authors.txt"
 
 domains = create_domains_list(file_name_1)
 surnames = create_surname_list(file_name_2)
-modified_date = create_modified_dictionaries()
+modified_date = create_modified_dictionaries(file_name_3)
