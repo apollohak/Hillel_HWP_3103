@@ -6,7 +6,7 @@
 class FileReader:
     def __init__(self, filename):
         self.filename = filename
-        self.data = self._read_file()
+        self._data = self._read_file()
 
     def _read_file(self):
         with open(self.filename, "r") as txt_file:
@@ -24,7 +24,7 @@ class FileReader:
 
 class DomainsWorker(FileReader):
     def create_domains_list(self):
-        res_list = [name.replace(".", "")[:-1] for name in self.data]
+        res_list = [name.replace(".", "")[:-1] for name in self._data]
         return res_list
 
     def __repr__(self):
@@ -43,7 +43,7 @@ class DomainsWorker(FileReader):
 
 class NamesWorker(FileReader):
     def create_surname_list(self):
-        res_list = [surname.split("\t")[1] for surname in self.data]
+        res_list = [surname.split("\t")[1] for surname in self._data]
         return res_list
 
     def __repr__(self):
@@ -79,7 +79,7 @@ class ModDateWorker(FileReader):
 
     def _create_split_date_list(self):
         result = []
-        for data in self.data:
+        for data in self._data:
             data = data.split("-")[0]
             data = data.split()
             if len(data) == 3:
