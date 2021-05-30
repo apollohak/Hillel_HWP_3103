@@ -41,7 +41,7 @@ Author, Quote, URL.
 
 
 def create_quotes_csv_file(data):
-    with open("quote_list.csv", 'w') as f:
+    with open("quote_list.csv", 'w', encoding="utf-8") as f:
         writer = csv.writer(f, delimiter=",", lineterminator="\r")
         writer.writerow(["Author", "Quote", "URL"])
         writer.writerows(sorted(data))

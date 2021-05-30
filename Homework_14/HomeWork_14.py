@@ -9,6 +9,13 @@
 интелект    (int от 1 до 10. Начальное значение 1)
 """
 
+
 class Units:
-    def __init__(self):
-        pass
+    def __init__(self, name, clan):
+        self.name = name
+        self.clan = clan
+        self.health = 100
+        self.dexterity = 1
+        self.intelligence = 1
+
+    def healing(self):

@@ -41,7 +41,7 @@ Author, Quote, URL.
 
 
 def create_quotes_csv_file(data):
-    with open("quote_dict.csv", 'w', encoding='windows-1251') as f:
+    with open("quote_dict.csv", 'w', encoding='utf-8') as f:
         header = ["Author", "Quote", "URL"]
         writer = csv.DictWriter(f, delimiter=",", lineterminator="\r", fieldnames=header)
         writer.writeheader()
