@@ -7,7 +7,7 @@ class FileReader:
     def __init__(self, filename):
         self.filename = filename
         self._data = self._read_file()
-        self.result = self.create_res_list()
+        self._result = self.create_res_list()
 
     def _read_file(self):
         with open(self.filename, "r") as txt_file:
@@ -18,7 +18,7 @@ class FileReader:
         raise NotImplementedError
 
     def __repr__(self):
-        return f"{self.result}"
+        return f"{self._result}"
 
 
 ##################################################
