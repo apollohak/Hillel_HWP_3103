@@ -7,11 +7,18 @@ class FileReader:
     def __init__(self, filename):
         self.filename = filename
         self._data = self._read_file()
+        self.result = self.create_res_list()
 
     def _read_file(self):
         with open(self.filename, "r") as txt_file:
             data = txt_file.readlines()
         return data
+
+    def create_res_list(self):
+        raise NotImplementedError
+
+    def __repr__(self):
+        return f"{self.result}"
 
 
 ##################################################
@@ -23,12 +30,9 @@ class FileReader:
 
 
 class DomainsWorker(FileReader):
-    def create_domains_list(self):
+    def create_res_list(self):
         res_list = [name.replace(".", "")[:-1] for name in self._data]
         return res_list
-
-    def __repr__(self):
-        return f"{self.create_domains_list()}"
 
 
 ##################################################
@@ -42,12 +46,9 @@ class DomainsWorker(FileReader):
 
 
 class NamesWorker(FileReader):
-    def create_surname_list(self):
+    def create_res_list(self):
         res_list = [surname.split("\t")[1] for surname in self._data]
         return res_list
-
-    def __repr__(self):
-        return f"{self.create_surname_list()}"
 
 
 ##################################################
@@ -63,7 +64,6 @@ class NamesWorker(FileReader):
 
 class ModDateWorker(FileReader):
     def __init__(self, filename):
-        super().__init__(filename)
         self._months = {'January': '01',
                         'February': '02',
                         'March': '03',
@@ -76,6 +76,7 @@ class ModDateWorker(FileReader):
                         'October': '10',
                         'November': '11',
                         'December': '12'}
+        super().__init__(filename)
 
     def _create_split_date_list(self):
         result = []
@@ -86,7 +87,7 @@ class ModDateWorker(FileReader):
                 result.append(data)
         return result
 
-    def create_modified_dictionaries(self):
+    def create_res_list(self):
         result = []
         for data in self._create_split_date_list():
             data_dd = data[0]
@@ -96,9 +97,6 @@ class ModDateWorker(FileReader):
             result.append({"date_original": " ".join(data),
                            "date_modified": f"{data_dd}/{self._months.get(data[1])}/{data[2]}"})
         return result
-
-    def __repr__(self):
-        return f"{self.create_modified_dictionaries()}"
 
 
 domains_worker = DomainsWorker("domains.txt")
