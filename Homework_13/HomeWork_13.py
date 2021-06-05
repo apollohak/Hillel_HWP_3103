@@ -18,7 +18,7 @@ class FileReader:
         raise NotImplementedError
 
     @property
-    def result(self):
+    def result_list(self):
         return self._result
 
     def __repr__(self):
@@ -67,18 +67,18 @@ class NamesWorker(FileReader):
 
 
 class ModDateWorker(FileReader):
-    months = {'January': '01',
-              'February': '02',
-              'March': '03',
-              'April': '04',
-              'May': '05',
-              'June': '06',
-              'July': '07',
-              'August': '08',
-              'September': '09',
-              'October': '10',
-              'November': '11',
-              'December': '12'}
+    _months = {'January': '01',
+               'February': '02',
+               'March': '03',
+               'April': '04',
+               'May': '05',
+               'June': '06',
+               'July': '07',
+               'August': '08',
+               'September': '09',
+               'October': '10',
+               'November': '11',
+               'December': '12'}
 
     def __create_split_date_list(self):
         result = []
@@ -97,7 +97,7 @@ class ModDateWorker(FileReader):
             if len(data_dd) == 1:
                 data_dd = "0" + data_dd
             result.append({"date_original": " ".join(data),
-                           "date_modified": f"{data_dd}/{ModDateWorker.months.get(data[1])}/{data[2]}"})
+                           "date_modified": f"{data_dd}/{self._months.get(data[1])}/{data[2]}"})
         return result
 
 

@@ -26,48 +26,43 @@
 
 
 class Unit:
-    HEALTH = 100
-    FORCE = 1
-    AGILITY = 1
-    INTELLIGENCE = 1
+    _health = 100
+    _force = 1
+    _agility = 1
+    _intelligence = 1
 
     def __init__(self, name, clan):
         self.name = name
         self.clan = clan
-        self.health = Unit.HEALTH
-        self.force = Unit.FORCE
-        self.agility = Unit.AGILITY
-        self.intelligence = Unit.INTELLIGENCE
-        self._skill = None
 
     def sleep(self):
-        if self.health < 90:
-            self.health += 10
+        if self._health < 90:
+            self._health += 10
         else:
-            self.health = 100
+            self._health = 100
 
-    def increase_self_skill(self):
-        if self._skill == "intelligence" and self.intelligence <= 9:
-            self.intelligence += 1
-        elif self._skill == "agility" and self.agility <= 9:
-            self.agility += 1
-        elif self._skill == "force" and self.force <= 9:
-            self.force += 1
+    @classmethod
+    def increase_self_skill(cls):
+        if cls == Mage and Mage._intelligence <= 9:
+            Mage._intelligence += 1
+        elif cls == Archer and Archer._agility <= 9:
+            Archer._agility += 1
+        elif cls == Knight and Knight._force <= 9:
+            Knight._force += 1
 
-    def __repr__(self):
+    def __str__(self):
         return f"Имя: {self.name} | Клан: {self.clan} | "
 
     @property
-    def stat_info(self):
-        return f"{self.name}: " \
-               f"Здоровье:{self.health} | Сила:{self.force} | Ловкость:{self.agility} | Интеллект:{self.intelligence}"
+    def current_stat(self):
+        return f"                   «{self.name}»                   \n"\
+               f"Здоровье:{self._health} | Сила:{self._force} | Ловкость:{self._agility} | Интеллект:{self._intelligence}"
 
 
 class Mage(Unit):
     def __init__(self, name, clan, atribut):
         super().__init__(name, clan)
         self.atr = atribut
-        self._skill = "intelligence"
 
     def __str__(self):
         return super().__str__() + f"Тип магии: {self.atr}"
@@ -77,7 +72,6 @@ class Archer(Unit):
     def __init__(self, name, clan, atribut):
         super().__init__(name, clan)
         self.atr = atribut
-        self._skill = "agility"
 
     def __str__(self):
         return super().__str__() + f"Тип лука: {self.atr}"
@@ -87,21 +81,11 @@ class Knight(Unit):
     def __init__(self, name, clan, atribut):
         super().__init__(name, clan)
         self.atr = atribut
-        self._skill = "force"
 
     def __str__(self):
         return super().__str__() + f"Тип оружия: {self.atr}"
 
 
-mage = Mage("Дубль'Вэ", "Телекинез", "Воздух")
-archer = Archer("Рон", "В яблочко!", "Лук")
+mage = Mage("Дубль'Вэ", "lambda user's", "Воздух")
+archer = Archer("Робин", "В худи", "Лук")
 knight = Knight("Артер", "Обливион", "Пика")
-print(mage)
-mage.increase_self_skill()
-print(mage.stat_info)
-print(archer)
-archer.increase_self_skill()
-print(archer.stat_info)
-print(knight)
-knight.increase_self_skill()
-print(knight.stat_info)
