@@ -36,6 +36,7 @@ class Unit:
         self.clan = clan
 
     def sleep(self):
+        """Метод увеличения здаровья"""
         if self._health < 90:
             self._health += 10
         else:
@@ -43,6 +44,7 @@ class Unit:
 
     @classmethod
     def increase_self_skill(cls):
+        """Метод увеличения базового навыка"""
         if cls == Mage and Mage._intelligence <= 9:
             Mage._intelligence += 1
         elif cls == Archer and Archer._agility <= 9:
@@ -55,6 +57,7 @@ class Unit:
 
     @property
     def current_stat(self):
+        """Метод показывающий текущие характеристики"""
         return f"                   «{self.name}»                   \n"\
                f"Здоровье:{self._health} | Сила:{self._force} | Ловкость:{self._agility} | Интеллект:{self._intelligence}"
 
