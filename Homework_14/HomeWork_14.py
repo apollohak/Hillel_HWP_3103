@@ -92,4 +92,3 @@ class Knight(Unit):
 mage = Mage("Дубль'Вэ", "lambda user's", "Воздух")
 archer = Archer("Робин", "В худи", "Лук")
 knight = Knight("Вейдер", "Орден ситхов", "Меч")
-print(archer)
